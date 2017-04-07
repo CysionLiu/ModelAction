@@ -11,7 +11,8 @@
 1. to create BaseAction class extends the MvcAction class ,which can do some common things,such as headers;
 2. to create a javabean related to a json;
 3. to create a action extends BaseAction;
- ~~ @Override
+
+        @Override
        protected String getUrl() {
            return Urls.BASE+Urls.FIND_COL;
        }
@@ -29,5 +30,6 @@
                     }
                 return false;
 
-       }~~
- 4. new GetAction(this).taskId(100).execute(DataState.CACHE_FIRST);
+       }
+4. MvcPointer.init(actionListener, true, httpProxy) should be invoke first;
+5. new GetAction(this).taskId(100).execute(DataState.CACHE_FIRST);
