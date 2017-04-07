@@ -24,11 +24,11 @@
 
        @Override
        protected boolean getTargetDataFromJson(String aResult, long aTaskId) {
-             if(valid){
-                        listener.onSuccess(aResult,aTaskId);
+             if(valid(){
+                        listener.onSuccess(targetResult,aTaskId);
                          return true;
-                    }
-                return false;
+             }
+             return false;
 
        }
 4. MvcPointer.init(actionListener, true, httpProxy) should be invoke first;
