@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.cysion.mvcation.MvcPointer;
+import com.cysion.mvcation.RetrofitProxy;
 import com.cysion.mvcation.base.DataState;
 import com.cysion.mvcation.base.TActionListener;
 
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements TActionListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MvcPointer.init(this, true, MvcPointer.PROXY.RETROFIT);
+        MvcPointer.init(this, true, RetrofitProxy.getInstance(this));
     }
 
 

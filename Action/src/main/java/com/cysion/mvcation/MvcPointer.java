@@ -11,38 +11,33 @@ import com.cysion.mvcation.base.MvcAction;
  */
 public class MvcPointer {
     private static Context mContext;
-    private static PROXY mPROXY;
-
-    public enum PROXY {
-        VOLLEY, RETROFIT
-    }
+    private static HttpProxy mHttpProxy;
 
     /**
      * Init.
      * @param aContext the a context
      */
-    public static void init(Context aContext, boolean aIsDebug, PROXY aPROXY) {
-        mContext = aContext.getApplicationContext();
-        MvcAction.initAction(mContext, aIsDebug);
-        mPROXY = aPROXY;
-        if (mPROXY==null||aContext==null) {
+    public static void init(Context aContext, boolean aIsDebug, HttpProxy aHttpProxy) {
+        if (aContext == null) {
             try {
-                throw new Exception("they should be set properly");
+                throw new Exception("aContext should not be null");
             } catch (Exception aE) {
                 aE.printStackTrace();
             }
         }
+        mContext = aContext.getApplicationContext();
+        MvcAction.initAction(mContext, aIsDebug);
+        mHttpProxy = aHttpProxy;
+        if (mHttpProxy == null || aContext == null) {
+            mHttpProxy = RetrofitProxy.getInstance(mContext);
+        }
     }
+
     /**
      * 获得网络相关的代理者
      * @return 网络加载代理对象
      */
     public static HttpProxy getHttpProxy() {
-        if (mPROXY == PROXY.VOLLEY) {
-            return VolleyProxy.getInstance(mContext);
-        }else if(mPROXY == PROXY.RETROFIT){
-            return RetrofitProxy.getInstance(mContext);
-        }
-        return null;
+        return mHttpProxy;
     }
 }
