@@ -1,7 +1,7 @@
 ### ModelAction
 
 #### This is a light library to valid, control and cache the data from net,and its inner http-implementation is alternative, and here volley and retrofit are provided.
-
+> It should be pointed out that the lib is just for ease the GET and POST in http for common condition.
 #### The aim of the lib is as the follow three aspects:
 - to valid,parse or lighten the response data from net , to decrease the work of controller such as activity;
 - to maintain the consistence of one request-response procedure,especially in the condition of numbers of request by the same url with the different request body.
