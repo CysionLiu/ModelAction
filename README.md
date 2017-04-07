@@ -25,8 +25,8 @@
        @Override
        protected boolean getTargetDataFromJson(String aResult, long aTaskId) {
              if(valid(){
-                        listener.onSuccess(targetResult,aTaskId);
-                         return true;
+                   listener.onSuccess(targetResult,aTaskId);
+                   return true;
              }
              return false;
 
