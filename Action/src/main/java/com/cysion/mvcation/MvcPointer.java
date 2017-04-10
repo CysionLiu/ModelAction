@@ -15,6 +15,7 @@ public class MvcPointer {
 
     /**
      * Init.
+     *
      * @param aContext the a context
      */
     public static void init(Context aContext, boolean aIsDebug, HttpProxy aHttpProxy) {
@@ -23,25 +24,27 @@ public class MvcPointer {
                 throw new Exception("aContext should not be null");
             } catch (Exception aE) {
                 aE.printStackTrace();
+            } finally {
+                return;
             }
         }
         mContext = aContext.getApplicationContext();
         MvcAction.initAction(mContext, aIsDebug);
         mHttpProxy = aHttpProxy;
-        if (mHttpProxy == null || aContext == null) {
-            mHttpProxy = RetrofitProxy.getInstance(mContext);
+        if (mHttpProxy == null) {
+            mHttpProxy = VolleyProxy.getInstance(mContext);
         }
     }
 
-    /**
-     * 获得网络相关的代理者
-     * @return 网络加载代理对象
-     */
     public static HttpProxy getHttpProxy() {
         return mHttpProxy;
     }
 
     public static void clearCache(Context aContext) {
         CacheProxy.get(aContext).clear();
+    }
+
+    public static void cancelTask(String[] tags) {
+        getHttpProxy().cancelAll(tags);
     }
 }

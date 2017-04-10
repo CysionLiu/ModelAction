@@ -20,9 +20,6 @@ import static com.cysion.mvcation.MvcUtils.isGoodJson;
 
 /**
  * Created by CysionLiu on 2017/4/7..
- * 频繁网络交互的代理者，目前基于volley
- * 要结合结合{@link THttpListener}使用
- * get和post方法，还包括加入header的情况
  */
 public class VolleyProxy implements HttpProxy {
 
@@ -40,7 +37,6 @@ public class VolleyProxy implements HttpProxy {
         return instance;
     }
 
-    //单例模式创建请求队列，context应传进程的context
     public static synchronized RequestQueue getQueue(Context context) {
         if (queue == null) {
             queue = Volley.newRequestQueue(context);
@@ -48,12 +44,13 @@ public class VolleyProxy implements HttpProxy {
         return queue;
     }
 
-    //取消特定tag的请求
-    public void cancel(Object tag) {
+
+    private void cancel(String tag) {
         queue.cancelAll(tag);
     }
 
-    public void cancelAll(Object[] tags) {
+    @Override
+    public void cancelAll(String[] tags) {
         for (int i = 0; i < tags.length; i++) {
             cancel(tags[i]);
         }
@@ -82,7 +79,7 @@ public class VolleyProxy implements HttpProxy {
                 return headers;
             }
         };
-        stringRequest.setTag(taskId);
+        stringRequest.setTag(taskId + "");
         queue.add(stringRequest);
     }
 
@@ -114,7 +111,7 @@ public class VolleyProxy implements HttpProxy {
                 return headers;
             }
         };
-        stringRequest.setTag(taskId);
+        stringRequest.setTag(taskId + "");
         queue.add(stringRequest);
     }
 }

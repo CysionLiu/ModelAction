@@ -2,37 +2,35 @@ package com.cysion.mvcation.base;
 
 /**
  * Created by CysionLiu on 2017/4/7.
+ * Cache data operator
  */
 
 public enum DataState {
 
     /*
-     * 数据操作码
-     * 始终不缓存，只读取网络数据--成功获取只发生在网络上获取到 目标数据(真正需要的数据) 时
+     *
+     * Never use cache,always from network
      */
     NO_CACHE,
 
 
-    /*  默认优先读取缓存，缓存没有才联网获取数据，获得目标数据后，缓存
-   成功获取 既可以发生在联网获取最新数据时，也可发生在读取到缓存时
+    /*  read from cache first,if there is no in cache ,request network,then
+    write the data into cache
     */
     CACHE_FIRST,
 
 
-    /*默认获取网络最新数据，若没有得到目标数据，才读取缓存，缓存没有，则获取不到目标数据
-   若网络有目标数据，则返回，并全部更新缓存  ---成功获取只发生在联网得到目标数据时*/
+    /*request from network first,if gotten,refresh cache,if no,read from cache;if cache is empty,fail*/
     NET_FIRST,
 
 
-    /* 缓存，下拉刷新，必须联网获取目标数据，若没有目标数据，则刷新失败
-          * 若有目标数据，则返回目标数据，并以全部更新的形式更新缓存
-           * --成功获取只发生在联网获得目标数据时*/
+    /* pull down and refresh data,request from network,if gotten,refresh cache,if no,fail
+           * --only the target core data gotten is successful*/
     HEAD_REFRESH,
 
 
 
-    /* 缓存，加载更多，必须联网获取目标数据，若没有目标数据，则刷新失败
-        * 若有目标数据，则返回目标数据，默认不缓存(必要时以尾部增加的形式更新缓存)
-         * --成功获取只发生在联网获得目标数据时*/
+    /* load more data,the defalut implemetation is the same as MO_CACHE
+         * --only the target core data gotten is successful*/
     LOAD_MORE
 }

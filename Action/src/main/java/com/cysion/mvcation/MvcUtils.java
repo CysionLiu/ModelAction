@@ -18,10 +18,10 @@ public class MvcUtils {
     private static final String MD5 = "MD5";
 
     /**
-     * MD5加密
-     * @param string  要加密的字符串
-     * @param encoding 字符编码
-     * @return  密文
+     * MD5 encryption
+     * @param string  the string to be encrypted
+     * @param encoding charset
+     * @return  result
      * @throws Exception
      */
     public static String MD5encrypt(String string, String encoding) {
@@ -46,8 +46,6 @@ public class MvcUtils {
     }
 
     /**
-     * 检查是否有网络
-     *
      * @param context the context
      * @return the boolean
      */

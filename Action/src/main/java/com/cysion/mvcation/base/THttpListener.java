@@ -7,14 +7,13 @@ package com.cysion.mvcation.base;
 public interface THttpListener {
 
     /**
-     * 成功获得结果返回
+     * only the target core data gotten is successful
      * @param obj
      * @param taskId
      */
     void onSuccess(Object obj, long taskId);
 
     /**
-     * 结果获得失败。目前返回的obj是VolleyError
      * @param obj
      * @param taskId
      */

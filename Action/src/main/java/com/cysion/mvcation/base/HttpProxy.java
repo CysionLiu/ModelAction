@@ -14,4 +14,6 @@ public interface HttpProxy {
     void postData(String url, final THttpListener callBack,
                   final Map<String, String> paraMap, final Map<String,
             String> headers, final long taskId);
+
+    void cancelAll(String[] tag);
 }

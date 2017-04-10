@@ -2,23 +2,24 @@ package com.cysion.mvcation.base;
 
 /**
  * Created by CysionLiu on 2017/4/7.
+ * Error Code for request
  */
 public class Constant {
 
-    //数据错误码
+
     /*
-    未能获得网络信息     */
-    public static final String NO_NET = "未能获取网络信息";
+    find no net     */
+    public static final String NO_NET = "find no net";
     /*
-    未能获得目标数据，但是的确访问成功     */
-    public static final String NO_TARGET_DATA = "未能获取到相关数据";
+    connect success but no target data     */
+    public static final String NO_TARGET_DATA = "connect success but no target data";
 
 
-    /*未能获得目标数据     */
-    public static final String UNKNOWN_ERROR = "未知错误";
+    /*no target data    */
+    public static final String UNKNOWN_ERROR = "no target data";
 
 
-    /*一般处在局域网中   */
-    public static final String WRONG_SERVER = "未接入有效网络";
+    /*in Lan without network   */
+    public static final String WRONG_SERVER = "in Lan without network";
 
 }

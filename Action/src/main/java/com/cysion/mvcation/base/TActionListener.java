@@ -6,14 +6,13 @@ package com.cysion.mvcation.base;
 public interface TActionListener {
 
     /**
-     * 成功获得结果返回，注意，此结果代表本次请求最希望的数据，即目标数据
+     * only the target core data gotten is successful
      * @param obj
-     * @param taskId
+     * @param taskId request id, to trace the procedure.
      */
     void onSuccess(Object obj, long taskId);
 
     /**
-     * 结果获得失败。可以为缓存带有的结果码
      * @param obj
      * @param taskId
      */
