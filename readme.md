@@ -37,27 +37,27 @@
        	@Override
       	 protected boolean getTargetDataFromJson(String aResult, long aTaskId) {
              if(valid(){
-                   listener.onSuccess(targetResult,aTaskId);
+                   listener.onSuccess(*targetResult*,aTaskId);
                    return true;
              }
             return false;
 
        }
 > **Note: the operation in getTargetDataFromJson() should be the same as above;**
-4. should invoke MvcPointer.init(actionListener, true, httpProxy);
+4. should invoke MvcPointer.init(actionListener, debug, httpProxy);
 5. new GetAction(listener).params(map).taskId(100).execute(DataState.CACHE_FIRST);
 
 		private TActionListener mActionListener = new TActionListener() {
         @Override
-        public void onSuccess(Object obj, int taskId) {
-            switch (taskId) {
-                 case MultiArticlesAction.NORMAL:
+        public void onSuccess(Object obj, long taskId) {
+            switch ((int)taskId) {
+                 case Action.NORMAL:
                    //cache has done in action
                     break;
-                case MultiArticlesAction.LOAD_MOER:
+                case Action.LOAD_MOER:
                    //do some work
                     break;
-                case MultiArticlesAction.REFRESH:
+                case Action.REFRESH:
                     //do some work
                     break;
             }
