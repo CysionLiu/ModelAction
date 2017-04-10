@@ -3,13 +3,14 @@
 [中文版戳这里](/readme_cn.md)
 #### A light Android library to **validate**, **trace** and **cache** the data from network,and its inner http-implementation is alternative, here volley and retrofit are provided.
 > It should be pointed out that the lib is just for ease the GET and POST in http for common condition and in some special ones,the raw function of http-lib should in use.
-
 ### Aim:
+---
 - to **validate,parse or lighten** the response data from network , to decrease the duty of controller;
 - to **trace** the consistence of one request-response procedure,especially in high-frequency condition of the same url with the different request body.
 - to **cache** the data just by the command code from controller, to ease usage and decrease the duty of controller.
 
 ### Usage:
+---
 
 1. to create a BaseAction class extends the MvcAction class ,which can do some common things,such as headers:
 
@@ -42,7 +43,7 @@
             return false;
 
        }
-> **Note: the operation in getTargetDataFromJson() has to like above;**
+> **Note: the operation in getTargetDataFromJson() should be the same as above;**
 4. should invoke MvcPointer.init(actionListener, true, httpProxy);
 5. new GetAction(listener).params(map).taskId(100).execute(DataState.CACHE_FIRST);
 
@@ -64,6 +65,7 @@
 
 
 ### Customization:
+---
 - define one request's cache expiration by override in one sub Action class:
 
 		@Override
@@ -80,7 +82,7 @@
     }
 
 ###License
-
+---
 Copyright 2017 CysionLiu
 
 Licensed under the Apache License, Version 2.0 (the "License");
