@@ -1,37 +1,96 @@
 ### ModelAction
+---
 [中文版戳这里](/readme_cn.md)
-#### This is a light library to valid, control and cache the data from net,and its inner http-implementation is alternative, and here volley and retrofit are provided.
-> It should be pointed out that the lib is just for ease the GET and POST in http for common condition.
-#### The aim of the lib is as the follow three aspects:
-- to valid,parse or lighten the response data from net , to decrease the work of controller such as activity;
-- to maintain the consistence of one request-response procedure,especially in the condition of numbers of request by the same url with the different request body.
-- to cache the data just by the execute code , decrease the coupling between controller and model in MVC.
+#### A light Android library to **validate**, **trace** and **cache** the data from network,and its inner http-implementation is alternative, here volley and retrofit are provided.
+> It should be pointed out that the lib is just for ease the GET and POST in http for common condition and in some special ones,the raw function of http-lib should in use.
 
-### The steps to use action:
-1. to create BaseAction class extends the MvcAction class ,which can do some common things,such as headers;
+### Aim:
+- to **validate,parse or lighten** the response data from network , to decrease the duty of controller;
+- to **trace** the consistence of one request-response procedure,especially in high-frequency condition of the same url with the different request body.
+- to **cache** the data just by the command code from controller, to ease usage and decrease the duty of controller.
+
+### Usage:
+
+1. to create a BaseAction class extends the MvcAction class ,which can do some common things,such as headers:
+
+  		@Override
+    	protected Map<String, String> getHeader() {
+        	Map<String,String> headers = new HashMap<>();
+       		headers.put("test1","one");
+        	headers.put("test2","two");
+        	return headers;
+    	}
 2. to create a javabean related to a json;
 3. to create a action extends BaseAction;
 
         @Override
-       protected String getUrl() {
+      	 protected String getUrl() {
            return Urls.BASE+Urls.FIND_COL;
-       }
+      	 }
 
-       @Override
-       protected int getHttpMethod() {
-           return Method_GET;
-       }
+      	 @Override
+      	 protected int getHttpMethod() {
+      	     return Method_GET;
+      	 }
 
-       @Override
-       protected boolean getTargetDataFromJson(String aResult, long aTaskId) {
+       	@Override
+      	 protected boolean getTargetDataFromJson(String aResult, long aTaskId) {
              if(valid(){
                    listener.onSuccess(targetResult,aTaskId);
                    return true;
              }
-             return false;
+            return false;
 
        }
-4. MvcPointer.init(actionListener, true, httpProxy) should be invoke first;
-5. new GetAction(this).taskId(100).execute(DataState.CACHE_FIRST);
+> **Note: the operation in getTargetDataFromJson() has to like above;**
+4. should invoke MvcPointer.init(actionListener, true, httpProxy);
+5. new GetAction(listener).params(map).taskId(100).execute(DataState.CACHE_FIRST);
 
-[中文版戳这里]:(/readme_cn.md)
+		private TActionListener mActionListener = new TActionListener() {
+        @Override
+        public void onSuccess(Object obj, int taskId) {
+            switch (taskId) {
+                 case MultiArticlesAction.NORMAL:
+                   //cache has done in action
+                    break;
+                case MultiArticlesAction.LOAD_MOER:
+                   //do some work
+                    break;
+                case MultiArticlesAction.REFRESH:
+                    //do some work
+                    break;
+            }
+        }
+
+
+### Customization:
+- define one request's cache expiration by override in one sub Action class:
+
+		@Override
+    	protected int getKeepTime() {
+        	return 10;
+    	}
+- define a special header in a sub Action class by override:
+
+	    protected Map<String, String> getHeader() {
+        if (mHeader == null) {
+            mHeader = new HashMap<>();
+        }
+        return mHeader;
+    }
+
+###License
+
+Copyright 2017 CysionLiu
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
