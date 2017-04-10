@@ -70,7 +70,7 @@
 
 		@Override
     	protected int getKeepTime() {
-        	return 10;
+        	return 10;//TimeUnits:s
     	}
 - define a special header in a sub Action class by override:
 
