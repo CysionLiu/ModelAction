@@ -1,5 +1,5 @@
 ### ModelAction
-
+[中文版戳这里](/readme_cn.md)
 #### This is a light library to valid, control and cache the data from net,and its inner http-implementation is alternative, and here volley and retrofit are provided.
 > It should be pointed out that the lib is just for ease the GET and POST in http for common condition.
 #### The aim of the lib is as the follow three aspects:
@@ -33,4 +33,5 @@
        }
 4. MvcPointer.init(actionListener, true, httpProxy) should be invoke first;
 5. new GetAction(this).taskId(100).execute(DataState.CACHE_FIRST);
+
 [中文版戳这里]:(/readme_cn.md)
