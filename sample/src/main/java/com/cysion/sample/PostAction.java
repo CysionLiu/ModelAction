@@ -26,4 +26,9 @@ public class PostAction extends BaseAction {
         listener.onSuccess(aResult,aTaskId);
         return true;
     }
+
+    @Override
+    protected int getKeepTime() {
+        return 10;
+    }
 }

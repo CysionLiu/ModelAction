@@ -13,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by CysionLiu on 2017/4/7.
  */
-public class MaUtils {
+public class MvcUtils {
 
     private static final String MD5 = "MD5";
 

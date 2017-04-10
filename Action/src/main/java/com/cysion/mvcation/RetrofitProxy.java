@@ -15,7 +15,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-import static com.cysion.mvcation.MaUtils.isGoodJson;
+import static com.cysion.mvcation.MvcUtils.isGoodJson;
 
 /**
  * Created by CysionLiu on 2017/4/7.
@@ -42,7 +42,7 @@ public class RetrofitProxy implements HttpProxy {
 
     @Override
     public void getData(String url, final THttpListener callBack, Map<String, String> params, Map<String, String> headers, final long taskId) {
-        mRetrofit.create(PreCall.class).getResult(url, params).enqueue(new Callback<String>() {
+        mRetrofit.create(PreCall.class).getResult(url,headers).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (!isGoodJson(response.body())) {
@@ -61,7 +61,7 @@ public class RetrofitProxy implements HttpProxy {
 
     @Override
     public void postData(String url, final THttpListener callBack, Map<String, String> params, Map<String, String> headers, final long taskId) {
-        mRetrofit.create(PreCall.class).postResult(url, params).enqueue(new Callback<String>() {
+        mRetrofit.create(PreCall.class).postResult(url,headers,params).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (!isGoodJson(response.body())) {

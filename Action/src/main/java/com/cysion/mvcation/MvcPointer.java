@@ -40,4 +40,8 @@ public class MvcPointer {
     public static HttpProxy getHttpProxy() {
         return mHttpProxy;
     }
+
+    public static void clearCache(Context aContext) {
+        CacheProxy.get(aContext).clear();
+    }
 }

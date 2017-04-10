@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.cysion.mvcation.CacheProxy;
-import com.cysion.mvcation.MaUtils;
+import com.cysion.mvcation.MvcUtils;
 import com.cysion.mvcation.MvcPointer;
 
 import java.util.Arrays;
@@ -84,6 +84,10 @@ public abstract class MvcAction {
         taskId = id;
         return this;
     }
+    //文件最大保存时间，默认长期存储，单位s
+    protected int getKeepTime(){
+        return Integer.MAX_VALUE;
+    }
 
     /**
      * 执行方法，包括相关校验，各种数据请求方式的处理
@@ -95,7 +99,7 @@ public abstract class MvcAction {
         checkUrlAndId();
         checkActionCode();
         getKey();
-        if (!MaUtils.isNetAvailable(mContext)) {
+        if (!MvcUtils.isNetAvailable(mContext)) {
             whenNoNet();
             return;
         }
@@ -114,7 +118,7 @@ public abstract class MvcAction {
         String buffer = getAppearUrl(params);
         logv("method--" + getHttpMethod() + "--url---" + buffer);
         try {
-            key = MaUtils.MD5encrypt(buffer.toString(), "utf-8");
+            key = MvcUtils.MD5encrypt(buffer.toString(), "utf-8");
         } catch (Exception aE) {
             aE.printStackTrace();
         }
@@ -202,7 +206,14 @@ public abstract class MvcAction {
             }
             MvcPointer.getHttpProxy().getData(url, callBack, getParams(), getHeader(), taskId);
         } else if(mReqMethod == Method_POST){
+            Log.e("flag--","MvcAction--byHttp--209--"+url);
             MvcPointer.getHttpProxy().postData(url, callBack, getParams(), getHeader(), taskId);
+        }
+        //测试用，打印输出header内容
+        Map<String,String> tempHeader = getHeader();
+        for (Map.Entry entry : tempHeader.entrySet()) {
+            Object key = entry.getKey( );
+            logv("header--"+key+":"+entry.getValue());
         }
         taskId = -1;
         url = getUrl();
@@ -248,7 +259,7 @@ public abstract class MvcAction {
             case CACHE_FIRST:
             case NET_FIRST:
                 cacheObj.remove(key);
-                cacheObj.put(key, shouldCache);
+                cacheObj.put(key, shouldCache,getKeepTime());
                 break;
             case HEAD_REFRESH:
                 addHeadCache(shouldCache);
@@ -354,6 +365,6 @@ public abstract class MvcAction {
     protected void addHeadCache(String aShouldCache) {
         CacheProxy cacheObj = CacheProxy.get(mContext);
         cacheObj.remove(key);
-        cacheObj.put(key, aShouldCache);
+        cacheObj.put(key, aShouldCache,getKeepTime());
     }
 }

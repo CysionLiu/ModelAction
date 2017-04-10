@@ -3,6 +3,7 @@ package com.cysion.sample;
 import com.cysion.mvcation.base.MvcAction;
 import com.cysion.mvcation.base.TActionListener;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,6 +19,9 @@ public abstract class BaseAction extends MvcAction {
 
     @Override
     protected Map<String, String> getHeader() {
-        return super.getHeader();
+        Map<String,String> headers = new HashMap<>();
+        headers.put("test1","one");
+        headers.put("test2","two");
+        return headers;
     }
 }

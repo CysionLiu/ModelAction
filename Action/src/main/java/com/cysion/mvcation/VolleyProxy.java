@@ -16,7 +16,7 @@ import com.cysion.mvcation.base.THttpListener;
 
 import java.util.Map;
 
-import static com.cysion.mvcation.MaUtils.isGoodJson;
+import static com.cysion.mvcation.MvcUtils.isGoodJson;
 
 /**
  * Created by CysionLiu on 2017/4/7..
