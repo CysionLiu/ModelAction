@@ -11,11 +11,11 @@ public interface THttpListener {
      * @param obj
      * @param taskId
      */
-    void onSuccess(Object obj, long taskId);
+    void onSuccess(Object obj, int taskId);
 
     /**
      * @param obj
      * @param taskId
      */
-    void onFailure(Object obj, long taskId);
+    void onFailure(Object obj, int taskId);
 }

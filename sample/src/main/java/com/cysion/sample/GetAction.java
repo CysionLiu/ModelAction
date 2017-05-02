@@ -1,47 +1,65 @@
 package com.cysion.sample;
 
-import android.text.TextUtils;
-import android.util.Log;
-
 import com.cysion.mvcation.base.TActionListener;
-import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import static com.cysion.mvcation.base.MvcAction.Method.Method_GET;
 
 /**
  * Created by xianshang.liu on 2017/4/7.
  */
 
 public class GetAction extends BaseAction {
+    public static final int ZHIHU_NEW = 315;
+    public static final int ZHIHU_DATE = 991;
+    public static final int ZHIHU_ID = 175;
+
+
     public GetAction(TActionListener aListener) {
         super(aListener);
     }
 
     @Override
-    protected String getUrl() {
-        return Urls.BASE + Urls.FIND_COL;
+    protected String getUrl(int aTaskId) {
+        switch (aTaskId) {
+            case ZHIHU_NEW:
+                return Urls.BASE_ZHIHU_URL + Urls.ZHIHU_LATEST;
+            case ZHIHU_DATE:
+                return Urls.BASE_ZHIHU_URL + Urls.ZHIHU_DATE;
+            case ZHIHU_ID:
+                return Urls.BASE_ZHIHU_URL + Urls.ZHIHU_ID;
+        }
+        return null;
     }
 
     @Override
-    protected int getHttpMethod() {
+    protected Method getHttpMethod(int aTaskId) {
         return Method_GET;
     }
 
     @Override
-    protected boolean getTargetDataFromJson(String aResult, long aTaskId) {
-        try {
-            JSONObject jsonObject = new JSONObject(aResult);
-            String temp = (String) jsonObject.opt("product");
-            if (!TextUtils.isEmpty(temp)) {
-                TestBean bean = new Gson().fromJson(aResult, TestBean.class);
-                Log.e("flag--", "GetAction--getTargetDataFromJson--38--" + bean.getWebUrl());
-                listener.onSuccess(aResult, aTaskId);
-                return true;
-            }
-        } catch (JSONException aE) {
-            aE.printStackTrace();
+    protected boolean getTargetDataFromJson(String aResult, int aTaskId) {
+        switch (aTaskId) {
+            case ZHIHU_NEW:
+                handleZhihuNEW(aResult,aTaskId);
+                break;
+            case ZHIHU_DATE:
+                handleZhihuDate(aResult,aTaskId);
+                break;
+            case ZHIHU_ID:
+                handleZhihuID(aResult,aTaskId);
+                break;
         }
         return false;
+    }
+
+    private void handleZhihuID(String aResult, int aTaskId) {
+
+    }
+
+    private void handleZhihuDate(String aResult, int aTaskId) {
+    }
+
+    private void handleZhihuNEW(String aResult, int aTaskId) {
+
     }
 }

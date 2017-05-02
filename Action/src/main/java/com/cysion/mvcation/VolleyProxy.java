@@ -57,7 +57,7 @@ public class VolleyProxy implements HttpProxy {
     }
 
     @Override
-    public void getData(String url, final THttpListener callBack, final Map<String, String> params, final Map<String, String> headers, final long taskId) {
+    public void getData(String url, final THttpListener callBack, final Map<String, String> params, final Map<String, String> headers, final int taskId) {
         StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(final String response) {
@@ -84,7 +84,7 @@ public class VolleyProxy implements HttpProxy {
     }
 
     @Override
-    public void postData(String url, final THttpListener callBack, final Map<String, String> paraMap, final Map<String, String> headers, final long taskId) {
+    public void postData(String url, final THttpListener callBack, final Map<String, String> paraMap, final Map<String, String> headers, final int taskId) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response
                 .Listener<String>() {
             @Override

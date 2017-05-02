@@ -51,7 +51,7 @@ public class RetrofitProxy implements HttpProxy {
     }
 
     @Override
-    public void getData(String url, final THttpListener callBack, Map<String, String> params, Map<String, String> headers, final long taskId) {
+    public void getData(String url, final THttpListener callBack, Map<String, String> params, Map<String, String> headers, final int taskId) {
         Call<String> call = mRetrofit.create(PreCall.class).getResult(url, headers);
         mCallQueue.put(taskId + "", call);
         call.enqueue(new Callback<String>() {
@@ -75,7 +75,7 @@ public class RetrofitProxy implements HttpProxy {
     }
 
     @Override
-    public void postData(String url, final THttpListener callBack, Map<String, String> params, Map<String, String> headers, final long taskId) {
+    public void postData(String url, final THttpListener callBack, Map<String, String> params, Map<String, String> headers, final int taskId) {
         Call<String> call = mRetrofit.create(PreCall.class).postResult(url, headers, params);
         mCallQueue.put(taskId + "", call);
         call.enqueue(new Callback<String>() {

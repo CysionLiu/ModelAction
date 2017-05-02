@@ -10,11 +10,11 @@ public interface TActionListener {
      * @param obj
      * @param taskId request id, to trace the procedure.
      */
-    void onSuccess(Object obj, long taskId);
+    void onSuccess(Object obj, int taskId);
 
     /**
      * @param obj
      * @param taskId
      */
-    void onFailure(Object obj, long taskId);
+    void onFailure(Object obj, int taskId);
 }

@@ -9,11 +9,11 @@ import java.util.Map;
 public interface HttpProxy {
 
     void getData(String url, final THttpListener callBack, final Map<String, String> paraMap,final Map<String,
-            String> headers, final long taskId);
+            String> headers, final int taskId);
 
     void postData(String url, final THttpListener callBack,
                   final Map<String, String> paraMap, final Map<String,
-            String> headers, final long taskId);
+            String> headers, final int taskId);
 
     void cancelAll(String[] tag);
 }

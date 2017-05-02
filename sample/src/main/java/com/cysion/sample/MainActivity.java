@@ -8,11 +8,7 @@ import android.widget.Toast;
 
 import com.cysion.mvcation.MvcPointer;
 import com.cysion.mvcation.RetrofitProxy;
-import com.cysion.mvcation.base.DataState;
 import com.cysion.mvcation.base.TActionListener;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements TActionListener {
 
@@ -23,34 +19,37 @@ public class MainActivity extends AppCompatActivity implements TActionListener {
         MvcPointer.init(this, true, RetrofitProxy.getInstance(this));
     }
 
-
-    public void showGet(View view) {
-        new GetAction(this).taskId(100).execute(DataState.NO_CACHE);
+    public void getWithPath(View view) {
+        Log.e("flag--", "getWithPath(MainActivity.java:23)-->>");
     }
 
-    public void showPost(View view) {
-        Map<String, String> params = new HashMap<>();
-        params.put("istest", "0");
-        params.put("articleType", "1003");
-        params.put("date", "0330");
-        params.put("page", "1");
-        new PostAction(this).taskId(101).params(params).execute(DataState.CACHE_FIRST);
+    public void noCache(View view) {
+        Log.e("flag--", "noCache(MainActivity.java:27)-->>");
+    }
+
+    public void cacheFirstPost(View view) {
+        Log.e("flag--", "cacheFirstPost(MainActivity.java:31)-->>");
+    }
+
+    public void netFirst(View view) {
+        Log.e("flag--", "netFirst(MainActivity.java:35)-->>");
+    }
+
+    public void keepTime(View view) {
+        Log.e("flag--", "keepTime(MainActivity.java:39)-->>");
+    }
+
+    public void getWithParams(View view) {
+        Log.e("flag--", "getWithParams(MainActivity.java:43)-->>");
+    }
+
+    @Override
+    public void onSuccess(Object obj, int taskId) {
 
     }
 
     @Override
-    public void onSuccess(Object obj, long taskId) {
-        if (taskId == 100) {
-            Log.e("flag--", "MainActivity--onSuccess--42--" + taskId);
-        } else if (taskId==101) {
-            Log.e("flag--", "MainActivity--onSuccess--44--" + taskId);
-        }
-        Toast.makeText(MainActivity.this, ((String)obj).substring(0,50), Toast.LENGTH_SHORT).show();
-
+    public void onFailure(Object obj, int taskId) {
     }
 
-    @Override
-    public void onFailure(Object obj, long taskId) {
-        Log.e("flag--", "MainActivity--onFailure--94--" + taskId);
-    }
 }
