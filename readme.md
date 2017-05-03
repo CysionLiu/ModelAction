@@ -5,7 +5,7 @@
 > It should be pointed out that the lib is just for ease the GET and POST in http for common condition and in some special ones,the raw function of http-lib should in use.
 ### Aim:
 ---
-- to **validate,parse or lighten** the response data from network , to decrease the duty of controller;
+- to **validate,parse or lighten** the response data from network , to decouple C from M in MVC pattern;
 - to **trace** the consistence of one request-response procedure,especially in high-frequency condition of the same url with the different request body.
 - to **cache** the data just by the command code from controller, to ease usage and decrease the duty of controller.
 

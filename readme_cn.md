@@ -1,12 +1,12 @@
 ### ModelAction
 ---
 [click me](/readme.md)
-#### 一个轻量级的安卓数据操作库，主要是用来跟踪网络请求、校验和缓存来自网络的数据；底层的http实现可以灵活替换，目前提供了volley和Retrofit的实现方式。
+#### 一个轻量级的安卓网络请求操作库，主要是用来跟踪网络请求、校验和缓存来自网络的数据；底层的http实现可以灵活替换，目前提供了volley和Retrofit的实现方式。
 ### 目的:
 ---
-- 减少controller层的职责，将数据校验、解析操作转移到Model层;
+- 减少controller层的职责，将数据校验、解析操作回归到Model层;
 - 追踪每个请求，灵活控制请求，并能适应某些应用场景下单个url不同传参时的高频请求的数据一致性问题;
-- 解脱缓存操作，只需在网络请求时指定缓存操作码.便可内部实现对应缓存机制；
+- 解脱缓存操作，只需在网络请求时指定缓存操作码.便可内部实现对应缓存机制，且能本地实现缓存时间控制；
 
 ### 使用:
 ---
@@ -24,12 +24,12 @@
 3. 创建某个子类action，继承BaseAction，实现以下方法;
 
         @Override
-      	 protected String getUrl() {
+      	 protected String getUrl(int taskid) {
            return Urls.BASE+Urls.FIND_COL;
       	 }
 
       	 @Override
-      	 protected int getHttpMethod() {
+      	 protected int getHttpMethod(int taskid) {
       	     return Method_GET;
       	 }
 
@@ -79,6 +79,12 @@
         }
         return mHeader;
     }
+- 为某个请求设定特定的HttpProxy，如下:
+
+	    protected HttpProxy getHttpProxy() {
+              return MvcPointer.getHttpProxy();
+       }
+   
 
 ### License
 ---
