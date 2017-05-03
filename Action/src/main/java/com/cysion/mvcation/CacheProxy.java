@@ -133,7 +133,7 @@ public class CacheProxy {
      *
      * @param key      保存的key
      * @param value    保存的String数据
-     * @param saveTime 保存的时间，单位：秒
+     * @param saveTime 保存的时间，单位：s
      */
     public void put(String key, String value, int saveTime) {
         put(key, Utils.newStringWithDateInfo(saveTime, value));

@@ -4,6 +4,7 @@ package com.cysion.mvcation;
 import android.content.Context;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -36,14 +37,6 @@ public class VolleyProxy implements HttpProxy {
         }
         return instance;
     }
-
-    public static synchronized RequestQueue getQueue(Context context) {
-        if (queue == null) {
-            queue = Volley.newRequestQueue(context);
-        }
-        return queue;
-    }
-
 
     private void cancel(String tag) {
         queue.cancelAll(tag);
@@ -80,6 +73,10 @@ public class VolleyProxy implements HttpProxy {
             }
         };
         stringRequest.setTag(taskId + "");
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                15000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(stringRequest);
     }
 
@@ -112,6 +109,10 @@ public class VolleyProxy implements HttpProxy {
             }
         };
         stringRequest.setTag(taskId + "");
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                15000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(stringRequest);
     }
 }

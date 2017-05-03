@@ -2,34 +2,24 @@ package com.cysion.sample;
 
 import com.cysion.mvcation.base.TActionListener;
 
-import static com.cysion.mvcation.base.MvcAction.Method.Method_POST;
-
 /**
- * Created by xianshang.liu on 2017/4/7.
+ * Created by xianshang.liu on 2017/5/3.
  */
 
-public class PostAction extends BaseAction {
-    public static final int POST01 = 200;
-    public static final int POST02 = 201;
-
-    public PostAction(TActionListener aListener) {
+public class KeepTimeAction extends BaseAction {
+    public static final int GET_TIME = 301;
+    public KeepTimeAction(TActionListener aListener) {
         super(aListener);
     }
 
     @Override
     protected String getUrl(int aTaskId) {
-        switch (aTaskId) {
-            case POST01:
-                return Urls.POST_ONE;
-            case POST02:
-                return Urls.POST_TWO;
-        }
-        return Urls.POST_ONE;
+        return Urls.GET_TIME;
     }
 
     @Override
     protected Method getHttpMethod(int aTaskId) {
-        return Method_POST;
+        return Method.Method_GET;
     }
 
     @Override
@@ -42,5 +32,10 @@ public class PostAction extends BaseAction {
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected int getKeepTime() {
+        return 30;
     }
 }

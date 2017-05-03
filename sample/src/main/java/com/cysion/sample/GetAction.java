@@ -9,9 +9,9 @@ import static com.cysion.mvcation.base.MvcAction.Method.Method_GET;
  */
 
 public class GetAction extends BaseAction {
-    public static final int ZHIHU_NEW = 315;
-    public static final int ZHIHU_DATE = 991;
-    public static final int ZHIHU_ID = 175;
+    public static final int ZHIHU_NEW = 100;
+    public static final int ZHIHU_DATE = 101;
+    public static final int WEATHER_ID = 102;
 
 
     public GetAction(TActionListener aListener) {
@@ -22,11 +22,11 @@ public class GetAction extends BaseAction {
     protected String getUrl(int aTaskId) {
         switch (aTaskId) {
             case ZHIHU_NEW:
-                return Urls.BASE_ZHIHU_URL + Urls.ZHIHU_LATEST;
+                return Urls.ZHIHU_LATEST;
             case ZHIHU_DATE:
-                return Urls.BASE_ZHIHU_URL + Urls.ZHIHU_DATE;
-            case ZHIHU_ID:
-                return Urls.BASE_ZHIHU_URL + Urls.ZHIHU_ID;
+                return Urls.ZHIHU_DATE;
+            case WEATHER_ID:
+                return Urls.WEATHER_ID;
         }
         return null;
     }
@@ -40,26 +40,36 @@ public class GetAction extends BaseAction {
     protected boolean getTargetDataFromJson(String aResult, int aTaskId) {
         switch (aTaskId) {
             case ZHIHU_NEW:
-                handleZhihuNEW(aResult,aTaskId);
-                break;
+                return handleZhihuNEW(aResult, aTaskId);
             case ZHIHU_DATE:
-                handleZhihuDate(aResult,aTaskId);
-                break;
-            case ZHIHU_ID:
-                handleZhihuID(aResult,aTaskId);
-                break;
+                return handleZhihuDate(aResult, aTaskId);
+            case WEATHER_ID:
+                return handleZhihuID(aResult, aTaskId);
         }
         return false;
     }
 
-    private void handleZhihuID(String aResult, int aTaskId) {
-
+    private boolean handleZhihuID(String aResult, int aTaskId) {
+        if (aResult.length() > 100) {
+            listener.onSuccess(aResult.substring(0, 99), aTaskId);
+            return true;
+        }
+        return false;
     }
 
-    private void handleZhihuDate(String aResult, int aTaskId) {
+    private boolean handleZhihuDate(String aResult, int aTaskId) {
+        if (aResult.length() > 100) {
+            listener.onSuccess(aResult.substring(0, 99), aTaskId);
+            return true;
+        }
+        return false;
     }
 
-    private void handleZhihuNEW(String aResult, int aTaskId) {
-
+    private boolean handleZhihuNEW(String aResult, int aTaskId) {
+        if (aResult.length() > 100) {
+            listener.onSuccess(aResult.substring(0, 99), aTaskId);
+            return true;
+        }
+        return false;
     }
 }

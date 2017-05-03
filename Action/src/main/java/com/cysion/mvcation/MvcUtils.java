@@ -3,6 +3,7 @@ package com.cysion.mvcation;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.TextUtils;
 
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
@@ -65,6 +66,9 @@ public class MvcUtils {
     }
 
     public static boolean isGoodJson(String json) {
+        if (TextUtils.isEmpty(json)) {
+            return false;
+        }
         try {
             new JsonParser().parse(json);
             return true;

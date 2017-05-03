@@ -1,6 +1,8 @@
 package com.cysion.mvcation;
 
 import android.content.Context;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.cysion.mvcation.base.Constant;
 import com.cysion.mvcation.base.HttpProxy;
@@ -35,7 +37,7 @@ public class RetrofitProxy implements HttpProxy {
 
     private RetrofitProxy() {
         mClient = new OkHttpClient.Builder()
-                .connectTimeout(5, TimeUnit.SECONDS)
+                .connectTimeout(15, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .build();
         mRetrofit = new Retrofit.Builder().baseUrl("http://occupy").client(mClient).addConverterFactory(ScalarsConverterFactory.create()).build();
@@ -100,10 +102,17 @@ public class RetrofitProxy implements HttpProxy {
 
 
     private void cancel(String tag) {
+        if (!TextUtils.isEmpty(tag)) {
+            return;
+        }
         Call<String> call = mCallQueue.get(tag);
+        if (call == null) {
+            return;
+        }
         mCallQueue.remove(tag);
         call.cancel();
     }
+
     @Override
     public void cancelAll(String[] tags) {
         for (int i = 0; i < tags.length; i++) {
