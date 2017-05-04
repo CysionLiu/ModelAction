@@ -2,6 +2,7 @@
 ---
 [click me](/readme.md)
 #### 一个轻量级的安卓网络请求操作库，主要是用来跟踪网络请求、校验和缓存来自网络的数据；底层的http实现可以灵活替换，目前提供了volley和Retrofit的实现方式。
+> 需要指出的是，本库主要是针对项目中相对通用的GET和POST请求，某些特殊情况，可以直接使用底层的http实现，不过仍然建议下述自定义中提供的方式。
 ### 目的:
 ---
 - 减少controller层的职责，将数据校验、解析操作回归到Model层;
@@ -79,12 +80,12 @@
         }
         return mHeader;
     }
-- 为某个请求设定特定的HttpProxy，如下:
+- 重写下列方法，为某个请求设定特定的HttpProxy，如下:
 
 	    protected HttpProxy getHttpProxy() {
               return MvcPointer.getHttpProxy();
        }
-   
+- todo...   
 
 ### License
 ---

@@ -80,7 +80,13 @@
         }
         return mHeader;
     }
+- override the below method in sub-action to set special http-impl:
 
+	    protected HttpProxy getHttpProxy() {
+          return MvcPointer.getHttpProxy();
+       }
+    }
+- todo... 
 ### License
 ---
 Copyright 2017 CysionLiu
