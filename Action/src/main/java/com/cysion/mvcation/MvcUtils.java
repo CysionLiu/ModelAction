@@ -5,8 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
 
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonParser;
+import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -20,9 +19,10 @@ public class MvcUtils {
 
     /**
      * MD5 encryption
-     * @param string  the string to be encrypted
+     *
+     * @param string   the string to be encrypted
      * @param encoding charset
-     * @return  result
+     * @return result
      * @throws Exception
      */
     public static String MD5encrypt(String string, String encoding) {
@@ -70,9 +70,9 @@ public class MvcUtils {
             return false;
         }
         try {
-            new JsonParser().parse(json);
+            JSONObject jsonObject = new JSONObject(json);
             return true;
-        } catch (JsonParseException e) {
+        } catch (Exception e) {
             System.out.println("bad json: " + json);
             return false;
         }

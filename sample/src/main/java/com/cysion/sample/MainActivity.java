@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.cysion.mvcation.MvcPointer;
-import com.cysion.mvcation.VolleyProxy;
+import com.cysion.mvcation.RetrofitProxy;
 import com.cysion.mvcation.base.DataState;
 import com.cysion.mvcation.base.TActionListener;
 
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements TActionListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTextShow = (TextView) findViewById(R.id.text_show);
-        MvcPointer.init(this, true, VolleyProxy.getInstance(this));
+        MvcPointer.init(this, true, RetrofitProxy.getInstance(this));
         mGetAction = new GetAction(this);
         mPostAction = new PostAction(this);
         mKeepAction = new KeepTimeAction(this);

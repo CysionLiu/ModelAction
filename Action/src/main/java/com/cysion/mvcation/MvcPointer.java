@@ -32,7 +32,7 @@ public class MvcPointer {
         MvcAction.initAction(mContext, aIsDebug);
         mHttpProxy = aHttpProxy;
         if (mHttpProxy == null) {
-            mHttpProxy = VolleyProxy.getInstance(mContext);
+            mHttpProxy = RetrofitProxy.getInstance(mContext);
         }
     }
 
