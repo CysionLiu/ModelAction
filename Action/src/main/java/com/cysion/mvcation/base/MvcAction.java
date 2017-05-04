@@ -137,7 +137,6 @@ public abstract class MvcAction {
             }
             getHttpProxy().getData(url, callBack, getParams(), getHeader(), taskId);
         } else if (mReqMethod == Method_POST) {
-            Log.e("flag--", "MvcAction--byHttp--209--" + url);
             getHttpProxy().postData(url, callBack, getParams(), getHeader(), taskId);
         }
         Map<String, String> tempHeader = getHeader();
