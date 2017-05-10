@@ -13,6 +13,7 @@ public interface THttpListener {
      */
     void onSuccess(Object obj, int taskId);
 
+
     /**
      * @param obj
      * @param taskId

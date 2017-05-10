@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012-2013, Michael Yang 杨福海 (www.yangfuhai.com).
+ * Copyright (c) 2012-2013
  * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ public class CacheProxy {
     public static final int TIME_HOUR = 60 * 60;
     public static final int TIME_DAY = TIME_HOUR * 24;
     private static final int MAX_SIZE = 1000 * 1000 * 50; // 50 mb
-    private static final int MAX_COUNT = Integer.MAX_VALUE; // 不限制存放数据的数量
+    private static final int MAX_COUNT = Integer.MAX_VALUE; //
     private static Map<String, CacheProxy> mInstanceMap = new HashMap<String, CacheProxy>();
     private ACacheManager mCache;
 
@@ -97,16 +97,6 @@ public class CacheProxy {
         mCache = new ACacheManager(cacheDir, max_size, max_count);
     }
 
-    // =======================================
-    // ============ String数据 读写 ==============
-    // =======================================
-
-    /**
-     * 保存 String数据 到 缓存中
-     *
-     * @param key   保存的key
-     * @param value 保存的String数据
-     */
     public void put(String key, String value) {
         File file = mCache.newFile(key);
         BufferedWriter out = null;
@@ -128,23 +118,11 @@ public class CacheProxy {
         }
     }
 
-    /**
-     * 保存 String数据 到 缓存中
-     *
-     * @param key      保存的key
-     * @param value    保存的String数据
-     * @param saveTime 保存的时间，单位：s
-     */
+
     public void put(String key, String value, int saveTime) {
         put(key, Utils.newStringWithDateInfo(saveTime, value));
     }
 
-    /**
-     * 读取 String数据
-     *
-     * @param key
-     * @return String 数据
-     */
     public String getAsString(String key) {
         File file = mCache.get(key);
         if (!file.exists())
@@ -180,37 +158,17 @@ public class CacheProxy {
         }
     }
 
-    // =======================================
-    // ============= JSONObject 数据 读写 ==============
-    // =======================================
 
-    /**
-     * 保存 JSONObject数据 到 缓存中
-     *
-     * @param key   保存的key
-     * @param value 保存的JSON数据
-     */
     public void put(String key, JSONObject value) {
         put(key, value.toString());
     }
 
-    /**
-     * 保存 JSONObject数据 到 缓存中
-     *
-     * @param key      保存的key
-     * @param value    保存的JSONObject数据
-     * @param saveTime 保存的时间，单位：秒
-     */
+
     public void put(String key, JSONObject value, int saveTime) {
         put(key, value.toString(), saveTime);
     }
 
-    /**
-     * 读取JSONObject数据
-     *
-     * @param key
-     * @return JSONObject数据
-     */
+
     public JSONObject getAsJSONObject(String key) {
         String JSONString = getAsString(key);
         try {
@@ -222,37 +180,15 @@ public class CacheProxy {
         }
     }
 
-    // =======================================
-    // ============ JSONArray 数据 读写 =============
-    // =======================================
-
-    /**
-     * 保存 JSONArray数据 到 缓存中
-     *
-     * @param key   保存的key
-     * @param value 保存的JSONArray数据
-     */
     public void put(String key, JSONArray value) {
         put(key, value.toString());
     }
 
-    /**
-     * 保存 JSONArray数据 到 缓存中
-     *
-     * @param key      保存的key
-     * @param value    保存的JSONArray数据
-     * @param saveTime 保存的时间，单位：秒
-     */
     public void put(String key, JSONArray value, int saveTime) {
         put(key, value.toString(), saveTime);
     }
 
-    /**
-     * 读取JSONArray数据
-     *
-     * @param key
-     * @return JSONArray数据
-     */
+
     public JSONArray getAsJSONArray(String key) {
         String JSONString = getAsString(key);
         try {
@@ -264,16 +200,7 @@ public class CacheProxy {
         }
     }
 
-    // =======================================
-    // ============== byte 数据 读写 =============
-    // =======================================
 
-    /**
-     * 保存 byte数据 到 缓存中
-     *
-     * @param key   保存的key
-     * @param value 保存的数据
-     */
     public void put(String key, byte[] value) {
         File file = mCache.newFile(key);
         FileOutputStream out = null;
@@ -295,23 +222,12 @@ public class CacheProxy {
         }
     }
 
-    /**
-     * 保存 byte数据 到 缓存中
-     *
-     * @param key      保存的key
-     * @param value    保存的数据
-     * @param saveTime 保存的时间，单位：秒
-     */
+
+
     public void put(String key, byte[] value, int saveTime) {
         put(key, Utils.newByteArrayWithDateInfo(saveTime, value));
     }
 
-    /**
-     * 获取 byte 数据
-     *
-     * @param key
-     * @return byte 数据
-     */
     public byte[] getAsBinary(String key) {
         RandomAccessFile RAFile = null;
         boolean removeFile = false;
@@ -344,27 +260,11 @@ public class CacheProxy {
         }
     }
 
-    // =======================================
-    // ============= 序列化 数据 读写 ===============
-    // =======================================
-
-    /**
-     * 保存 Serializable数据 到 缓存中
-     *
-     * @param key   保存的key
-     * @param value 保存的value
-     */
     public void put(String key, Serializable value) {
         put(key, value, -1);
     }
 
-    /**
-     * 保存 Serializable数据到 缓存中
-     *
-     * @param key      保存的key
-     * @param value    保存的value
-     * @param saveTime 保存的时间，单位：秒
-     */
+
     public void put(String key, Serializable value, int saveTime) {
         ByteArrayOutputStream baos = null;
         ObjectOutputStream oos = null;
@@ -388,12 +288,7 @@ public class CacheProxy {
         }
     }
 
-    /**
-     * 读取 Serializable数据
-     *
-     * @param key
-     * @return Serializable 数据
-     */
+
     public Object getAsObject(String key) {
         byte[] data = getAsBinary(key);
         if (data != null) {
@@ -426,37 +321,17 @@ public class CacheProxy {
 
     }
 
-    // =======================================
-    // ============== bitmap 数据 读写 =============
-    // =======================================
 
-    /**
-     * 保存 bitmap 到 缓存中
-     *
-     * @param key   保存的key
-     * @param value 保存的bitmap数据
-     */
     public void put(String key, Bitmap value) {
         put(key, Utils.Bitmap2Bytes(value));
     }
 
-    /**
-     * 保存 bitmap 到 缓存中
-     *
-     * @param key      保存的key
-     * @param value    保存的 bitmap 数据
-     * @param saveTime 保存的时间，单位：秒
-     */
+
     public void put(String key, Bitmap value, int saveTime) {
         put(key, Utils.Bitmap2Bytes(value), saveTime);
     }
 
-    /**
-     * 读取 bitmap 数据
-     *
-     * @param key
-     * @return bitmap 数据
-     */
+
     public Bitmap getAsBitmap(String key) {
         if (getAsBinary(key) == null) {
             return null;
@@ -464,37 +339,16 @@ public class CacheProxy {
         return Utils.Bytes2Bimap(getAsBinary(key));
     }
 
-    // =======================================
-    // ============= drawable 数据 读写 =============
-    // =======================================
 
-    /**
-     * 保存 drawable 到 缓存中
-     *
-     * @param key   保存的key
-     * @param value 保存的drawable数据
-     */
     public void put(String key, Drawable value) {
         put(key, Utils.drawable2Bitmap(value));
     }
 
-    /**
-     * 保存 drawable 到 缓存中
-     *
-     * @param key      保存的key
-     * @param value    保存的 drawable 数据
-     * @param saveTime 保存的时间，单位：秒
-     */
+
     public void put(String key, Drawable value, int saveTime) {
         put(key, Utils.drawable2Bitmap(value), saveTime);
     }
 
-    /**
-     * 读取 Drawable 数据
-     *
-     * @param key
-     * @return Drawable 数据
-     */
     public Drawable getAsDrawable(String key) {
         if (getAsBinary(key) == null) {
             return null;
@@ -502,12 +356,6 @@ public class CacheProxy {
         return Utils.bitmap2Drawable(Utils.Bytes2Bimap(getAsBinary(key)));
     }
 
-    /**
-     * 获取缓存文件
-     *
-     * @param key
-     * @return value 缓存的文件
-     */
     public File file(String key) {
         File f = mCache.newFile(key);
         if (f.exists())
@@ -515,28 +363,17 @@ public class CacheProxy {
         return null;
     }
 
-    /**
-     * 移除某个key
-     *
-     * @param key
-     * @return 是否移除成功
-     */
+
     public boolean remove(String key) {
         return mCache.remove(key);
     }
 
-    /**
-     * 清除所有数据
-     */
+
     public void clear() {
         mCache.clear();
     }
 
-    /**
-     * @author 杨福海（michael） www.yangfuhai.com
-     * @version 1.0
-     * @title 缓存管理器
-     */
+
     public class ACacheManager {
         private final AtomicLong cacheSize;
         private final AtomicInteger cacheCount;
@@ -555,9 +392,7 @@ public class CacheProxy {
             calculateCacheSizeAndCacheCount();
         }
 
-        /**
-         * 计算 cacheSize和cacheCount
-         */
+
         private void calculateCacheSizeAndCacheCount() {
             new Thread(new Runnable() {
                 @Override
@@ -631,11 +466,7 @@ public class CacheProxy {
             }
         }
 
-        /**
-         * 移除旧的文件
-         *
-         * @return
-         */
+
         private long removeNext() {
             if (lastUsageDates.isEmpty()) {
                 return 0;
@@ -671,29 +502,14 @@ public class CacheProxy {
         }
     }
 
-    /**
-     * @author 杨福海（michael） www.yangfuhai.com
-     * @version 1.0
-     * @title 时间计算工具类
-     */
+
     private static class Utils {
 
-        /**
-         * 判断缓存的String数据是否到期
-         *
-         * @param str
-         * @return true：到期了 false：还没有到期
-         */
+
         private static boolean isDue(String str) {
             return isDue(str.getBytes());
         }
 
-        /**
-         * 判断缓存的byte数据是否到期
-         *
-         * @param data
-         * @return true：到期了 false：还没有到期
-         */
         private static boolean isDue(byte[] data) {
             String[] strs = getDateInfoFromDate(data);
             if (strs != null && strs.length == 2) {
@@ -784,7 +600,6 @@ public class CacheProxy {
         }
 
         /*
-         * Bitmap → byte[]
          */
         private static byte[] Bitmap2Bytes(Bitmap bm) {
             if (bm == null) {
@@ -796,7 +611,6 @@ public class CacheProxy {
         }
 
         /*
-         * byte[] → Bitmap
          */
         private static Bitmap Bytes2Bimap(byte[] b) {
             if (b.length == 0) {
@@ -806,31 +620,23 @@ public class CacheProxy {
         }
 
         /*
-         * Drawable → Bitmap
          */
         private static Bitmap drawable2Bitmap(Drawable drawable) {
             if (drawable == null) {
                 return null;
             }
-            // 取 drawable 的长宽
             int w = drawable.getIntrinsicWidth();
             int h = drawable.getIntrinsicHeight();
-            // 取 drawable 的颜色格式
             Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
                     : Bitmap.Config.RGB_565;
-            // 建立对应 bitmap
             Bitmap bitmap = Bitmap.createBitmap(w, h, config);
-            // 建立对应 bitmap 的画布
             Canvas canvas = new Canvas(bitmap);
             drawable.setBounds(0, 0, w, h);
-            // 把 drawable 内容画到画布中
             drawable.draw(canvas);
             return bitmap;
         }
 
-        /*
-         * Bitmap → Drawable
-         */
+
         @SuppressWarnings("deprecation")
         private static Drawable bitmap2Drawable(Bitmap bm) {
             if (bm == null) {

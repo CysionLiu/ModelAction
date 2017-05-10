@@ -23,7 +23,6 @@ public class MvcUtils {
      * @param string   the string to be encrypted
      * @param encoding charset
      * @return result
-     * @throws Exception
      */
     public static String MD5encrypt(String string, String encoding) {
         if (string == null || encoding == null) {
