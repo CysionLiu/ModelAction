@@ -44,14 +44,14 @@ public class GetAction extends BaseAction {
             case ZHIHU_DATE:
                 return handleZhihuDate(aResult, aTaskId);
             case WEATHER_ID:
-                return handleZhihuID(aResult, aTaskId);
+                return handleWeather(aResult, aTaskId);
         }
         return false;
     }
 
-    private boolean handleZhihuID(String aResult, int aTaskId) {
-        if (aResult.length() > 100) {
-            listener.onSuccess(aResult.substring(0, 99), aTaskId);
+    private boolean handleWeather(String aResult, int aTaskId) {
+        if (aResult.length() > 30) {
+            listener.onSuccess(aResult.substring(0, 29), aTaskId);
             return true;
         }
         return false;

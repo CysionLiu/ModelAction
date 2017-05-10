@@ -12,7 +12,8 @@
 ### Usage:
 ---
 
-1. to create a BaseAction class extends the MvcAction class ,which can do some common things,such as headers:
+1. should invoke MvcPointer.init(actionListener, debug, httpProxy) firstly;
+2. to create a BaseAction class extends the MvcAction class ,which can do some common things,such as headers:
 
   		@Override
     	protected Map<String, String> getHeader() {
@@ -21,8 +22,8 @@
         	headers.put("test2","two");
         	return headers;
     	}
-2. to create a javabean related to a json;
-3. to create a action extends BaseAction;
+3. to create a javabean related to a json;
+4. to create a action extends BaseAction;
 
         @Override
       	 protected String getUrl() {
@@ -44,7 +45,7 @@
 
        }
 > **Note: the operation in getTargetDataFromJson() should be the same as above;**
-4. should invoke MvcPointer.init(actionListener, debug, httpProxy);
+
 5. new GetAction(listener).params(map).taskId(100).execute(DataState.CACHE_FIRST);
 
 		private TActionListener mActionListener = new TActionListener() {

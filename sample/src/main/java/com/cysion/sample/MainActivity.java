@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity implements TActionListener {
         mTextShow.setText("loading...");
         Map<String, String> params = new HashMap<>();
         params.put("key", "12831296b9670");
-        params.put("city", "朝阳");
-        params.put("province", "北京");
+        params.put("city", "chaoyang");
+        params.put("province", "beijing");
         mGetAction.taskId(GetAction.WEATHER_ID).params(params).execute(DataState.NET_FIRST);
     }
 

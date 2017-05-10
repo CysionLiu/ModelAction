@@ -12,7 +12,8 @@
 ### 使用:
 ---
 
-1. 创建一个抽象BaseAction，继承MvcAction,并重写某些方法，指定通用的数据，比如header:
+1. 初始化MvcPointer.init(actionListener, debug, httpProxy);httpProxy，http处理策略类，可根据需要替换，默认提供Retrofit的通用实现,sample中有volley的实现；
+2. 创建一个抽象BaseAction，继承MvcAction,并重写某些方法，指定通用的数据，比如header:
 
   		@Override
     	protected Map<String, String> getHeader() {
@@ -21,8 +22,8 @@
         	headers.put("test2","two");
         	return headers;
     	}
-2. 创建javabean;
-3. 创建某个子类action，继承BaseAction，实现以下方法;
+3. 创建javabean;
+4. 创建某个子类action，继承BaseAction，实现以下方法;
 
         @Override
       	 protected String getUrl(int taskid) {
@@ -44,7 +45,7 @@
 
        }
 > **注意: getTargetDataFromJson()方法的操作需要和上述状况一致，aResult可能来自网络，也可能是缓存;**
-4. 初始化MvcPointer.init(actionListener, debug, httpProxy);httpProxy，http处理策略类，可根据需要替换，默认提供volley和Retrofit的通用实现；
+
 5. controller中调用：new GetAction(mActionListener).params(map).taskId(100).execute(DataState.CACHE_FIRST);
 
 		private TActionListener mActionListener = new TActionListener() {
