@@ -12,6 +12,17 @@
 ### Usage:
 ---
 
+> Add dependency:
+```
+repositories {
+    jcenter()
+}
+dependencies {
+     compile 'com.cysion:Action:1.0.0'
+    ...
+}
+```
+
 1. should invoke MvcPointer.init(actionListener, debug, httpProxy) firstly;
 2. to create a BaseAction class extends the MvcAction class ,which can do some common things,such as headers:
 

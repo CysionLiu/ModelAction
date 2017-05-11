@@ -12,6 +12,17 @@
 ### 使用:
 ---
 
+
+> 依赖导入:
+```
+repositories {
+    jcenter()
+}
+dependencies {
+     compile 'com.cysion:Action:1.0.0'
+    ...
+}
+```
 1. 初始化MvcPointer.init(actionListener, debug, httpProxy);httpProxy，http处理策略类，可根据需要替换，默认提供Retrofit的通用实现,sample中有volley的实现；
 2. 创建一个抽象BaseAction，继承MvcAction,并重写某些方法，指定通用的数据，比如header:
 
